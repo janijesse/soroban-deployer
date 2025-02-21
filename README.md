@@ -1,36 +1,58 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Tutorial: Implementador de Contratos Inteligentes Soroban con Next.js
 
-## Getting Started
+## Requisitos Previos
 
-First, run the development server:
+*   Node.js v18+
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Pasos
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1.  **Crear Proyecto Next.js:**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+    ```
+    npx create-next-app@latest soroban-deployer
+    cd soroban-deployer
+    ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+    *   `npx create-next-app`:  Crea un nuevo proyecto Next.js.
+    *   `cd soroban-deployer`:  Navega al directorio del proyecto.
+2.  **Instalar Dependencias:**
 
-## Learn More
+    ```
+    npm install --save stellar-sdk formidable
+    ```
 
-To learn more about Next.js, take a look at the following resources:
+    *   `npm install`:  Instala las bibliotecas necesarias.
+        *   `stellar-sdk`: Para interactuar con la red Stellar/Soroban.
+        *   `formidable`: Para manejar la carga de archivos.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3.  **Crear Interfaz de Usuario (páginas/index.js):**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+    *   Crea/modifica `pages/index.index.tsx` para incluir:
+        *   Campos para clave privada y archivo WASM.
+        *   Botón "Deploy" que llama a una API.
+        *   Componente `Modal` para mostrar resultados.
+4.  **Crear API (pages/api/deployer.js):**
 
-## Deploy on Vercel
+    *   Crea `pages/api/deployer.js` para:
+        *   Recibir clave privada y archivo WASM.
+        *   Subir WASM a la red Soroban.
+        *   Crear instancia del contrato.
+        *   Devolver hash WASM e ID del contrato.
+5.  **Ejecutar Aplicación:**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    ```
+    npm run dev
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+    *   `npm run dev`: Inicia el servidor de desarrollo de Next.js.
+
+## Advertencias
+
+*   **Seguridad:** No uses claves privadas reales en producción.
+*   **Horizon:** Puede haber límites de velocidad.
+
+## Notas Adicionales
+
+*   **¿Qué es Horizon?**  Horizon es la API de Stellar que la aplicación usa para interactuar con la red. Es el "middleware" que permite enviar transacciones y obtener información sobre cuentas, contratos, etc.  
+Puedes experimentar con Horizon Futurenet aquí: 
+`https://horizon-futurenet.stellar.org`.

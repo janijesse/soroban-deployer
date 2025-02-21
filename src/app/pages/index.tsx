@@ -1,16 +1,15 @@
 // pages/index.tsx
-"use client";
-import { useState } from "react";
-import NavBar from "./components/NavBar";
-import Modal from "./components/Modal";
+import { useState } from 'react';
+import NavBar from '../components/NavBar';
+import Modal from '../components/Modal';
 
 export default function Home() {
-  const [textField, setTextField] = useState("");
+  const [textField, setTextField] = useState('');
   const [file, setFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
-  const [wasmHash, setWasmHash] = useState("");
-  const [contractID, setContractID] = useState("");
+  const [wasmHash, setWasmHash] = useState('');
+  const [contractID, setContractID] = useState('');
 
   const handleTextChange = (event) => {
     setTextField(event.target.value);
@@ -24,12 +23,12 @@ export default function Home() {
     setIsLoading(true);
     if (file) {
       const formData = new FormData();
-      formData.append("file", file);
-      formData.append("textField", textField);
+      formData.append('file', file);
+      formData.append('textField', textField);
 
       try {
-        const response = await fetch("/api/deployer", {
-          method: "POST",
+        const response = await fetch('/api/deployer', {
+          method: 'POST',
           body: formData,
         });
         console.log(response.statusText);
@@ -59,7 +58,7 @@ export default function Home() {
       </div>
       <div className="container">
         <h2> Your private key </h2>
-        <p> (its not logged or stored!) </p>
+        <p> (its not logged or stored! 😉) </p>
         <input type="password" value={textField} onChange={handleTextChange} />
         <h2> Upload the wasm file </h2>
         <input type="file" onChange={handleFileChange} />
@@ -70,12 +69,7 @@ export default function Home() {
             Deploy
           </button>
         )}
-        <Modal
-          isOpen={isModalOpen}
-          onClose={closeModal}
-          wasmHash={wasmHash}
-          contractID={contractID}
-        />
+        <Modal isOpen={isModalOpen} onClose={closeModal} wasmHash={wasmHash} contractID={contractID} />
       </div>
     </>
   );
